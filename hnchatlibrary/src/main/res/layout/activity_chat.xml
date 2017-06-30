@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<cn.dreamtobe.kpswitch.widget.KPSwitchRootLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/activity_chat"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    android:layout_height="match_parent">
+    <include  layout="@layout/chat_room_title_layout"></include>
+    <include  layout="@layout/chat_room_message_list_layout"></include>
+    <include  layout="@layout/chat_room_bottom_layout"></include>
+    <cn.dreamtobe.kpswitch.widget.KPSwitchPanelLinearLayout
+        android:id="@+id/panel_root"
+        style="@style/Panel"
+        android:visibility="gone">
+        <include
+            android:id="@+id/sub_panel_emoji"
+            android:visibility="visible"
+            layout="@layout/chat_emoji_layout"/>
+        <include
+            android:id="@+id/sub_panel_more"
+            android:visibility="visible"
+            layout="@layout/chat_more_layout"/>
+    </cn.dreamtobe.kpswitch.widget.KPSwitchPanelLinearLayout>
+
+</cn.dreamtobe.kpswitch.widget.KPSwitchRootLinearLayout>

@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="top"
+    android:background="@drawable/chat_message_view_bottom"
+    android:paddingBottom="@dimen/bottom_component_margin_vertical"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingTop="@dimen/bottom_component_margin_vertical"
+    >
+
+    <FrameLayout
+        android:id="@+id/switchLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/editTextMessage"
+        android:layout_marginRight="6dp"
+        >
+
+        <ImageView
+            android:id="@+id/buttonAudioMessage"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:background="@drawable/chat_audio"
+            android:contentDescription="@string/empty"
+            android:scaleType="center"/>
+
+        <ImageView
+            android:id="@+id/buttonTextMessage"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center_vertical"
+            android:background="@drawable/chat_keybord"
+            android:contentDescription="@string/empty"
+            android:scaleType="center"
+            android:visibility="gone"
+            />
+    </FrameLayout>
+
+    <FrameLayout
+        android:id="@+id/audioTextSwitchLayout"
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/switchLayout"
+        android:layout_marginRight="6dp"
+        android:visibility="visible"
+        android:layout_toLeftOf="@+id/emoji_button"
+        android:layout_toRightOf="@+id/switchLayout">
+
+
+        <Button
+            android:id="@+id/audioRecord"
+            android:layout_width="match_parent"
+            android:layout_height="34dp"
+            android:background="@drawable/chat_audio_input_bg"
+            android:elevation="0dp"
+            android:text="@string/record_audio"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:visibility="gone"
+            />
+    </FrameLayout>
+
+
+    <EditText
+        android:id="@+id/editTextMessage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="6dp"
+        android:layout_toLeftOf="@+id/emoji_button"
+        android:layout_toRightOf="@+id/switchLayout"
+        android:autoLink="web|email|phone"
+        android:background="@drawable/chat_et_bg"
+        android:maxLines="4"
+        android:visibility="visible"
+        android:minHeight="35dip"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
+        android:paddingLeft="4dp"
+        android:paddingRight="2dp"
+        android:textSize="16sp"
+        android:hint="@string/please_input_content"
+        android:textColorHint="@color/color_grey_999999"
+        />
+
+
+    <FrameLayout
+        android:id="@+id/sendLayout"
+        android:layout_width="42dp"
+        android:layout_alignBottom="@+id/editTextMessage"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true">
+
+
+        <ImageView
+            android:id="@+id/buttonMoreFuntionInText"
+            android:layout_width="34dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/chat_more_bt"
+            android:contentDescription="@string/empty"
+            android:scaleType="center"/>
+
+
+        <TextView
+            android:id="@+id/buttonSendMessage"
+            android:layout_width="42dp"
+            android:layout_height="34dp"
+            android:layout_gravity="center"
+            android:background="@drawable/chat_send_bg"
+            android:contentDescription="@string/empty"
+            android:gravity="center"
+            android:text="@string/send"
+            android:visibility="gone"
+            android:textColor="@color/white"
+            android:textSize="14sp"/>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/emoji_button"
+        android:layout_width="33dp"
+        android:layout_height="33dp"
+        android:layout_marginRight="6dp"
+        android:background="@drawable/chat_emoji_bt"
+        android:contentDescription="@string/empty"
+        android:scaleType="centerInside"
+        android:layout_alignBottom="@+id/sendLayout"
+        android:layout_toStartOf="@+id/sendLayout" />
+
+</RelativeLayout>

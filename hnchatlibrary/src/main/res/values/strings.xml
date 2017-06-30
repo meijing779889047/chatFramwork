@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">HnChatLibrary</string>
+
+    <string name="not_allow_empty">不能为空</string>
+    <string name="empty"></string>
+    <!-- 语音 -->
+    <string name="record_audio">按住 说话</string>
+    <string name="record_audio_end">松开  结束</string>
+    <string name="timer_default">00:00</string>
+    <string name="recording_cancel_tip">松开手指，取消发送</string>
+    <string name="recording_cancel">手指上滑，取消发送</string>
+    <string name="please_input_content">请输入内容</string>
+    <string name="send">发送</string>
+    <string name="site">位置</string>
+    <string name="picture">照片</string>
+</resources>
