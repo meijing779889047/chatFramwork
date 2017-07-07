@@ -5,7 +5,7 @@ import android.content.res.Resources;
 import android.util.DisplayMetrics;
 import android.util.Log;
 
-import com.netease.nim.uikit.NimUIKit;
+import com.hn.chat.config.BaseConfig;
 
 import java.lang.reflect.Field;
 
@@ -30,7 +30,7 @@ public class ScreenUtil {
     public static int navbarheight;
 
     static {
-        init(NimUIKit.getContext());
+        init(BaseConfig.getContext());
     }
 
     public static int dip2px(float dipValue) {
@@ -69,14 +69,14 @@ public class ScreenUtil {
 
     public static int getDisplayWidth() {
         if (screenWidth == 0) {
-            GetInfo(NimUIKit.getContext());
+            GetInfo(BaseConfig.getContext());
         }
         return screenWidth;
     }
 
     public static int getDisplayHeight() {
         if (screenHeight == 0) {
-            GetInfo(NimUIKit.getContext());
+            GetInfo(BaseConfig.getContext());
         }
         return screenHeight;
     }

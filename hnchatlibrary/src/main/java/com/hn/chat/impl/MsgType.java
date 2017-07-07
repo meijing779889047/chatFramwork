@@ -17,5 +17,5 @@ public enum MsgType {
      PICTURE,//图片
      RECORD,//录音
      LOCATION,//位置
-     VIDEO,//视频
+     VIDEO, msgType,//视频
 }

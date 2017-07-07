@@ -57,7 +57,7 @@
             android:background="@drawable/chat_audio_input_bg"
             android:elevation="0dp"
             android:text="@string/record_audio"
-            android:textColor="@color/black"
+            android:textColor="@color/black_000000"
             android:textSize="16sp"
             android:visibility="gone"
             />
@@ -82,7 +82,7 @@
         android:paddingRight="2dp"
         android:textSize="16sp"
         android:hint="@string/please_input_content"
-        android:textColorHint="@color/color_grey_999999"
+        android:textColorHint="@color/grey_999999"
         />
 
 
@@ -114,7 +114,7 @@
             android:gravity="center"
             android:text="@string/send"
             android:visibility="gone"
-            android:textColor="@color/white"
+            android:textColor="@color/white_ffffff"
             android:textSize="14sp"/>
     </FrameLayout>
 

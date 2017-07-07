@@ -13,9 +13,8 @@ import android.provider.MediaStore;
 import android.support.v4.content.FileProvider;
 import android.util.Base64;
 
-import com.hn.library.R;
-import com.hn.library.utils.HnLogUtils;
-import com.hn.library.utils.HnUtils;
+import com.hn.chat.config.BaseConfig;
+import com.hn.chat.util.LogUtils;
 
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayOutputStream;
@@ -27,6 +26,8 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
+
+
 
 /**
  * Copyright (C) 2016,深圳市红鸟网络科技股份有限公司 All rights reserved.
@@ -50,7 +51,7 @@ public class PhotoUtils {
      * @return
      */
     public static Uri generateTempImageUri(Context context) {
-        return FileProvider.getUriForFile(context, context.getResources().getString(R.string.file_authorities),
+        return FileProvider.getUriForFile(context, BaseConfig.getContext().getPackageName()+".file.provider",
                 new File(pathForTempPhoto(context, generateTempPhotoFileName())));
     }
 
@@ -61,7 +62,7 @@ public class PhotoUtils {
      * @return
      */
     public static Uri generateTempCroppedImageUri(Context context) {
-        return FileProvider.getUriForFile(context, context.getResources().getString(R.string.file_authorities),
+        return FileProvider.getUriForFile(context,BaseConfig.getContext().getPackageName()+".file.provider",
                 new File(pathForTempPhoto(context, generateTempCroppedPhotoFileName())));
     }
 
@@ -107,7 +108,7 @@ public class PhotoUtils {
      */
     public static File bitmapToFile(Bitmap bm, String fileName) {
         try {
-            String path = Environment.getExternalStorageDirectory().getPath() + "/" + HnUtils.getPackageName() + "/images/";
+            String path = Environment.getExternalStorageDirectory().getPath() + "/" + BaseConfig.getContext().getPackageName() + "/images/";
             File dirFile = new File(path);
             if (!dirFile.exists()) {
                 dirFile.mkdirs();
@@ -122,6 +123,7 @@ public class PhotoUtils {
             e.printStackTrace();
 
         }
+
         return null;
     }
 
@@ -257,7 +259,7 @@ public class PhotoUtils {
             outputStream.flush();
             outputStream.close();
         } catch (IOException e) {
-            HnLogUtils.e("Failed to write photo: " + inputUri.toString() + " because: " + e);
+            LogUtils.e("Failed to write photo: " + inputUri.toString() + " because: " + e);
             return false;
         }
 

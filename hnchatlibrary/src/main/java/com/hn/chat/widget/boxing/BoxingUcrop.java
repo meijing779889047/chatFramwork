@@ -28,6 +28,7 @@ import com.bilibili.boxing.loader.IBoxingCrop;
 import com.bilibili.boxing.model.config.BoxingCropOption;
 import com.yalantis.ucrop.UCrop;
 
+
 /**
  * use Ucrop(https://github.com/Yalantis/uCrop) as the implement for {@link IBoxingCrop}
  *

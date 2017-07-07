@@ -2,6 +2,9 @@ package com.hn.chat.config;
 
 import android.content.Context;
 
+import com.hn.chat.util.ScreenUtil;
+import com.hn.chat.util.storage.StorageUtil;
+
 /**
  * Copyright (C) 2017,深圳市红鸟网络科技股份有限公司 All rights reserved.
  * 项目名称：ChatFremwork
@@ -23,6 +26,9 @@ public class BaseConfig {
      */
     public static void init(Context context) {
         BaseConfig.context = context.getApplicationContext();
+        // init tools
+        StorageUtil.init(context, null);
+        ScreenUtil.init(context);
 
     }
 

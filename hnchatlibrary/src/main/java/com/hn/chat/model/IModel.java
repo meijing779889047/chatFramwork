@@ -1,5 +1,9 @@
 package com.hn.chat.model;
 
+
+import com.hn.chat.impl.MessageObject;
+import com.hn.chat.impl.MsgType;
+
 /**
  * Copyright (C) 2017,深圳市红鸟网络科技股份有限公司 All rights reserved.
  * 项目名称：ChatFremwork
@@ -12,4 +16,28 @@ package com.hn.chat.model;
  * Version:  1.0.0
  */
 public interface IModel {
+
+    MessageObject  getMessageObj();//用于获取消息是在左边/右边
+
+    MsgType  getMessageType();//获取消息类型
+
+    long  getShowTime();//获取发送的时间 毫秒
+
+    String  getHeaderIcon();//获取用户头像地址
+
+    String  getUserNick();//获取用户昵称
+
+    String getTextData();//文本 emoji  图片地址
+
+    String getVoiceVideoLocUrl();//音/视频本地地址
+
+    String getVoiceVideoNetUrl();//音/视频网络地址
+
+    long  getVoiceVideoTime();//音视频的时间长
+
+    long  getVoiceVideoSize();//音视频的大小
+
+
+
+
 }

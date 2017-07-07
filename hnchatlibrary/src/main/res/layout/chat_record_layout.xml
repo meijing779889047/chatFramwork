@@ -13,7 +13,7 @@ android:visibility="gone">
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:text="@string/timer_default"
-    android:textColor="@color/white"
+    android:textColor="@color/white_ffffff"
     android:textSize="30sp"/>
 
 <LinearLayout
@@ -29,7 +29,7 @@ android:visibility="gone">
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="@string/recording_cancel"
-        android:textColor="@color/white"
+        android:textColor="@color/white_ffffff"
         android:textSize="15sp"/>
 </LinearLayout>
 </FrameLayout>

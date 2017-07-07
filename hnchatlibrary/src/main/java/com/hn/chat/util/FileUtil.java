@@ -1,5 +1,7 @@
 package com.hn.chat.util;
 
+import java.io.File;
+
 public class FileUtil {
     private static final String TAG = "FileUtil";
 
@@ -54,5 +56,39 @@ public class FileUtil {
         TB,
         Auto,
     }
+
+
+    /**
+     * 删除文件
+     *
+     * @param srcFilePath 文件路径
+     * @return {@code true}: 删除成功<br>{@code false}: 删除失败
+     */
+    public static boolean deleteFile(String srcFilePath) {
+        return deleteFile(getFileByPath(srcFilePath));
+    }
+    /**
+     * 根据文件路径获取文件
+     *
+     * @param filePath 文件路径
+     * @return 文件
+     */
+    public static File getFileByPath(String filePath) {
+        return (filePath == null || filePath.trim().length() == 0) ? null : new File(filePath);
+    }
+
+
+    /**
+     * 删除文件
+     *
+     * @param file 文件
+     * @return {@code true}: 删除成功<br>{@code false}: 删除失败
+     */
+    public static boolean deleteFile(File file) {
+        return file != null && (!file.exists() || file.isFile() && file.delete());
+    }
+
+
+
 
 }

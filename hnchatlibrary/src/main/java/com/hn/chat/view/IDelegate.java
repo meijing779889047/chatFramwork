@@ -23,8 +23,9 @@ public interface IDelegate {
 
     View      getRootView();
 
-    void      initWidget();
+    Bundle    getSavedInstanceState();
 
+    void      initWidget();
 
     Toolbar   getToolBar();
 

@@ -39,6 +39,7 @@ public abstract class ActivityPresenter<T extends IDelegate> extends AppCompatAc
         super.onCreate(savedInstanceState);
         mViewDelegate.create(getLayoutInflater(),null,savedInstanceState);
         setContentView(mViewDelegate.getRootView());
+
         initToolBar();
         mViewDelegate.initWidget();
 

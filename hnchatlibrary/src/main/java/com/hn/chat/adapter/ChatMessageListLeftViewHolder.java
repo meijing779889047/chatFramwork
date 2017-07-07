@@ -8,8 +8,9 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.hn.library.view.FrescoImageView;
-import com.netease.nim.uikit.R;
+import com.hn.chat.R;
+import com.hn.chat.widget.imageview.FrescoImageView;
+
 
 /**
  * Copyright (C) 2017,深圳市红鸟网络科技股份有限公司 All rights reserved.

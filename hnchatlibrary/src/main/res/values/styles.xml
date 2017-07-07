@@ -1,14 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <style name="chatStyle" parent="Theme.AppCompat.Light.NoActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <!-- 自定义的AlertDialog主题 -->
+        <item name="alertDialogTheme">@style/AlertDialogCustom</item>
+    </style>
+
+    <!-- 自定义AlertDialog显示风格 -->
+    <style name="AlertDialogCustom" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <!-- NeutralButtonStyle -->
+        <item name="buttonBarNeutralButtonStyle">@style/buttonBarNeutral</item>
+        <!-- NegativeButtonStyle -->
+        <item name="buttonBarNegativeButtonStyle">@style/buttonBarNegative</item>
+        <!-- PositiveButtonStyle -->
+        <item name="buttonBarPositiveButtonStyle">@style/buttonBarPositive</item>
+
+    </style>
+
+    <style name="buttonBarPositive"  parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="buttonBarNegative"  parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/grey_FF888888</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+    <style name="buttonBarNeutral"  parent="@style/Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/grey_FF888888</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+
     <style name="horizontal_light_thin_divider">
         <item name="android:layout_height">2px</item>
         <item name="android:layout_width">fill_parent</item>
-        <item name="android:background">@color/color_gray_d9d9d9</item>
+        <item name="android:background">@color/gray_d9d9d9</item>
     </style>
 
     <style name="Panel">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/panel_height</item>
+        <item name="android:layout_height">@dimen/dp_200</item>
         <item name="android:background">#fffefefe</item>
         <item name="android:orientation">vertical</item>
     </style>

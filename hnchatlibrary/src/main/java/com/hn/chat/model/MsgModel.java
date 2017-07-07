@@ -3,6 +3,7 @@ package com.hn.chat.model;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.hn.chat.impl.MessageObject;
 import com.hn.chat.impl.MsgType;
 
 /**
@@ -18,12 +19,16 @@ import com.hn.chat.impl.MsgType;
  */
 public class MsgModel  implements   IModel ,Parcelable{
 
+
+    private  MessageObject mMessageObject;
     private  long    time;//时间
     private  MsgType msgType;//消息类型
     private  String  msgData;//文本 emoji  图片地址
     private  String  voice_videoLocUrl;//音/视频本地地址
     private  String  voice_videoNetUrl;//音/视频网络地址
     private  long  voice_videoTime;//音视频的时间长
+    private  String   header;
+    private  String   nick;
     private  long  voice_videoSize; //音视频的大小
 
     public MsgModel() {
@@ -34,18 +39,26 @@ public class MsgModel  implements   IModel ,Parcelable{
         msgData = in.readString();
         voice_videoLocUrl = in.readString();
         voice_videoNetUrl = in.readString();
+        header = in.readString();
+        nick = in.readString();
         voice_videoTime = in.readLong();
         voice_videoSize = in.readLong();
     }
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeLong(voice_videoTime);
         dest.writeLong(voice_videoSize);
         dest.writeLong(time);
         dest.writeString(msgData);
+        dest.writeString(header);
+        dest.writeString(nick);
         dest.writeString(voice_videoLocUrl);
         dest.writeString(voice_videoNetUrl);
+        dest.writeLong(voice_videoTime);
+        dest.writeLong(voice_videoSize);
+
     }
 
     @Override
@@ -64,6 +77,15 @@ public class MsgModel  implements   IModel ,Parcelable{
             return new MsgModel[size];
         }
     };
+
+    public MessageObject getmMessageObject() {
+        return mMessageObject;
+    }
+
+    public void setmMessageObject(MessageObject mMessageObject) {
+        this.mMessageObject = mMessageObject;
+    }
+
 
     public long getTime() {
         return time;
@@ -119,5 +141,55 @@ public class MsgModel  implements   IModel ,Parcelable{
 
     public void setVoice_videoSize(long voice_videoSize) {
         this.voice_videoSize = voice_videoSize;
+    }
+
+    @Override
+    public MessageObject getMessageObj() {
+        return mMessageObject;
+    }
+
+    @Override
+    public MsgType getMessageType() {
+        return msgType;
+    }
+
+    @Override
+    public long getShowTime() {
+        return time;
+    }
+
+    @Override
+    public String getHeaderIcon() {
+        return header;
+    }
+
+    @Override
+    public String getUserNick() {
+        return nick;
+    }
+
+    @Override
+    public String getTextData() {
+        return msgData;
+    }
+
+    @Override
+    public String getVoiceVideoLocUrl() {
+        return voice_videoLocUrl;
+    }
+
+    @Override
+    public String getVoiceVideoNetUrl() {
+        return voice_videoNetUrl;
+    }
+
+    @Override
+    public long getVoiceVideoTime() {
+        return voice_videoTime;
+    }
+
+    @Override
+    public long getVoiceVideoSize() {
+        return voice_videoSize;
     }
 }

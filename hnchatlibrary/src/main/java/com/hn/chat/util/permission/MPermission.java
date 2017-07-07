@@ -7,9 +7,9 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 
-import com.netease.nim.uikit.permission.annotation.OnMPermissionDenied;
-import com.netease.nim.uikit.permission.annotation.OnMPermissionGranted;
-import com.netease.nim.uikit.permission.annotation.OnMPermissionNeverAskAgain;
+import com.hn.chat.util.permission.annotation.OnMPermissionDenied;
+import com.hn.chat.util.permission.annotation.OnMPermissionGranted;
+import com.hn.chat.util.permission.annotation.OnMPermissionNeverAskAgain;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.InvocationTargetException;

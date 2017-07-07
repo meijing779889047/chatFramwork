@@ -9,8 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.netease.nim.uikit.R;
-import com.netease.nim.uikit.session.actions.BaseAction;
+import com.hn.chat.R;
 
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class ActionsGridviewAdapter extends BaseAdapter {
 	public View getView(int position, View convertView, ViewGroup parent) {
 		View itemlayout;
 		if (convertView == null) {
-			itemlayout = LayoutInflater.from(context).inflate(R.layout.nim_actions_item_layout, null);
+			itemlayout = LayoutInflater.from(context).inflate(R.layout.tem_more_layout, null);
 		} else {
 			itemlayout = convertView;
 		}

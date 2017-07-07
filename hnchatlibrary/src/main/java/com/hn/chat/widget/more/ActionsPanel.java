@@ -5,8 +5,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.netease.nim.uikit.R;
-import com.netease.nim.uikit.session.actions.BaseAction;
+import com.hn.chat.R;
 
 import java.util.List;
 
@@ -17,11 +16,11 @@ import java.util.List;
 public class ActionsPanel {
 
     // 初始化更多布局adapter
-    public static void init(View view, List<BaseAction> actions) {
+    public static void init(View view, List<BaseAction> actions,MoreMenuOnClickListener listener) {
         final ViewPager viewPager = (ViewPager) view.findViewById(R.id.viewPager);
         final ViewGroup indicator = (ViewGroup) view.findViewById(R.id.actions_page_indicator);
 
-        ActionsPagerAdapter adapter = new ActionsPagerAdapter(viewPager, actions);
+        ActionsPagerAdapter adapter = new ActionsPagerAdapter(viewPager, actions,listener);
         viewPager.setAdapter(adapter);
         initPageListener(indicator, adapter.getCount(), viewPager);
     }

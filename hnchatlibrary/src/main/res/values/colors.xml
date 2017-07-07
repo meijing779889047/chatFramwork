@@ -3,13 +3,20 @@
     <color name="colorPrimary">#1E86D5</color>
     <color name="colorPrimaryDark">#1E86D5</color>
     <color name="colorAccent">#1E86D5</color>
-    <color name="colorMain">#1E86D5</color>
-    <color name="white">#ffffff</color>
-    <color name="color_f0f0f5">#f0f0f5</color>
-    <color name="black">#000000</color>
-    <color name="color_grey_999999">#999999</color>
-    <color name="color_gray_d9d9d9">#d9d9d9</color>
-    <!-- image picker -->
-    <color name="color_split_line_d9d9d9">#d9d9d9</color>
-    <color name="color_split_line_cccccc">#cccccc</color>
+
+    <color name="blue_1E86D5">#1E86D5</color>
+    <color name="blue_4fabf1">#4fabf1</color>
+
+    <color name="black_000000">#000000</color>
+
+    <color name="transparent">#00000000</color>
+    <color name="white_ffffff">#ffffff</color>
+    <color name="white_f0f0f5">#f0f0f5</color>
+    <color name="white_d9d9d9">#d9d9d9</color>
+    <color name="white_cccccc">#cccccc</color>
+    <color name="gray_d9d9d9">#d9d9d9</color>
+    <color name="grey_999999">#999999</color>
+    <color name="gray_757572">#757572</color>
+    <color name="grey_FF888888">#FF888888</color>
+
 </resources>

@@ -35,7 +35,7 @@ public class EmoticonPickerView extends LinearLayout implements IEmoticonCategor
 
     private boolean loaded = false;
 
-    private boolean withSticker;
+    private boolean withSticker=false;
 
     private EmoticonView gifView;
 
@@ -75,7 +75,7 @@ public class EmoticonPickerView extends LinearLayout implements IEmoticonCategor
         this.uiHandler = new Handler(context.getMainLooper());
 
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.nim_emoji_layout, this);
+        inflater.inflate(R.layout.emoji_layout, this);
     }
 
     @Override
@@ -151,8 +151,8 @@ public class EmoticonPickerView extends LinearLayout implements IEmoticonCategor
 
     private CheckedImageButton addEmoticonTabBtn(int index, OnClickListener listener) {
         CheckedImageButton emotBtn = new CheckedImageButton(context);
-        emotBtn.setNormalBkResId(R.drawable.nim_sticker_button_background_normal_layer_list);
-        emotBtn.setCheckedBkResId(R.drawable.nim_sticker_button_background_pressed_layer_list);
+        emotBtn.setNormalBkResId(R.drawable.sticker_button_background_normal_layer_list);
+        emotBtn.setCheckedBkResId(R.drawable.sticker_button_background_pressed_layer_list);
         emotBtn.setId(index);
         emotBtn.setOnClickListener(listener);
         emotBtn.setScaleType(ImageView.ScaleType.FIT_CENTER);

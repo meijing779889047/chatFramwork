@@ -12,5 +12,17 @@
     <string name="please_input_content">请输入内容</string>
     <string name="send">发送</string>
     <string name="site">位置</string>
-    <string name="picture">照片</string>
+    <string name="picture">相册</string>
+    <string name="input_panel_Album">相 册</string>
+    <string name="input_panel_Camera">拍 照</string>
+    <string name="input_panel_audio_call">语音通话</string>
+    <string name="input_panel_video_call">视频通话</string>
+    <string name="input_panel_video">视 频</string>
+    <string name="input_panel_location">位 置</string>
+
+    <string name="sdcard_not_enough_error">存储空间不足，无法保存此图片消息</string>
+    <string name="sdcard_not_enough_head_error">SD卡被拔出或存储空间不足，无法保存图片</string>
+    <string name="picker_image_error">获取图片出错</string>
+    <string name="get_camera_photo_fail">获取图片失败</string>
+    <string name="not_find_photo">没有获取到图片</string>
 </resources>

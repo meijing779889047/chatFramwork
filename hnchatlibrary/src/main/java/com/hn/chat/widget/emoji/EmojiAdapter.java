@@ -40,12 +40,12 @@ public class EmojiAdapter extends BaseAdapter {
 	 
 	@SuppressLint({ "ViewHolder", "InflateParams" })
 	public View getView(int position, View convertView, ViewGroup parent) {
-		convertView = LayoutInflater.from(context).inflate(R.layout.nim_emoji_item, null);
+		convertView = LayoutInflater.from(context).inflate(R.layout.emoji_item, null);
 		ImageView emojiThumb = (ImageView) convertView.findViewById(R.id.imgEmoji);
 		int count = EmojiManager.getDisplayCount();
 		int index = startIndex + position;
 		if (position == EmoticonView.EMOJI_PER_PAGE || index == count) {
-			emojiThumb.setBackgroundResource(R.drawable.nim_emoji_del);
+			emojiThumb.setBackgroundResource(R.drawable.emoji_del);
 		} else if (index < count) {
             emojiThumb.setBackgroundDrawable(EmojiManager.getDisplayDrawable(context, index));
 		}	

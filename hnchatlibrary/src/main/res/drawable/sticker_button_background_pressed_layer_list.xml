@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android" >
 
-    <item android:width="@dimen/split_one_pixels">
+    <item android:width="@dimen/dp_1">
         <shape android:shape="rectangle" >
-            <solid android:color="@color/color_split_line_d9d9d9" />
+            <solid android:color="@color/white_d9d9d9" />
         </shape>
     </item>
-    <item android:left="@dimen/split_one_pixels">
+    <item android:left="@dimen/dp_1">
         <shape android:shape="rectangle" >
-            <solid android:color="@color/color_split_line_d9d9d9" />
+            <solid android:color="@color/white_d9d9d9" />
         </shape>
     </item>
 

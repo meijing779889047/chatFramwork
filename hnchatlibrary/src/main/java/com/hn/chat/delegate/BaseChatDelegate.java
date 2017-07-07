@@ -1,10 +1,12 @@
 package com.hn.chat.delegate;
 
-import android.content.Context;
+
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Handler;
 import android.support.annotation.ColorInt;
 import android.support.annotation.DrawableRes;
+import android.support.annotation.NonNull;
 import android.support.annotation.StringRes;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.AppCompatImageButton;
@@ -19,33 +21,47 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
+
 
 import com.hn.chat.R;
+import com.hn.chat.adapter.ChatMessageListAdapter;
 import com.hn.chat.impl.ChatRoomListener;
+import com.hn.chat.impl.MessageObject;
 import com.hn.chat.impl.MsgType;
-import com.hn.chat.model.MsgModel;
+import com.hn.chat.model.IModel;
 import com.hn.chat.util.DimenUtil;
 import com.hn.chat.util.LogUtils;
+
 import com.hn.chat.util.StringUtil;
 import com.hn.chat.util.Utils;
+
 import com.hn.chat.view.AppDeleagte;
+import com.hn.chat.widget.boxing.PickImageHelperClient;
 import com.hn.chat.widget.emoji.EmoticonPickerView;
 import com.hn.chat.widget.emoji.IEmoticonSelectedListener;
 import com.hn.chat.widget.emoji.MoonUtil;
+import com.hn.chat.widget.more.ActionsPanel;
+import com.hn.chat.widget.more.BaseAction;
+import com.hn.chat.widget.more.MoreMenuOnClickListener;
+
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.List;
 
 import cn.dreamtobe.kpswitch.util.KPSwitchConflictUtil;
 import cn.dreamtobe.kpswitch.util.KeyboardUtil;
 import cn.dreamtobe.kpswitch.widget.KPSwitchPanelLinearLayout;
 import cn.dreamtobe.kpswitch.widget.KPSwitchRootLinearLayout;
 
-import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
+
+import static android.app.Activity.RESULT_OK;
+
 
 
 /**
@@ -59,7 +75,7 @@ import static android.icu.lang.UCharacter.GraphemeClusterBreak.T;
  * 修改备注：
  * Version:  1.0.0
  */
-public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeRefreshLayout.OnRefreshListener,View.OnClickListener,IEmoticonSelectedListener  {
+public abstract  class BaseChatDelegate<T extends IModel>  extends AppDeleagte   implements SwipeRefreshLayout.OnRefreshListener,View.OnClickListener,IEmoticonSelectedListener ,MoreMenuOnClickListener {
 
      private String  TAG="ChatRoomDelegate";
      //初始化头部视图       返回 标题  子标题                布局文件:chat_room_title_layout
@@ -85,17 +101,27 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
      //初始化录音视图                                       布局文件：chat_record_layout
 //     private FrameLayout            flRecordBg;//录音视图父控件
 //     private Chronometer            mChronometer;//实现显示器
-
+     //初始化菜单视图
     private KPSwitchRootLinearLayout   mKPSwitchRootLinearLayout;//聊天父容器
     private KPSwitchPanelLinearLayout  mKPSwitchPanelLinearLayout;//底部更多菜单栏父容器
     private View                       mEmojiMenuBg;//emoji父容器
     private View                       mMoreMenuBg;//更多父布局
+    private List<BaseAction>           actions=new ArrayList<>();//更多操作
 
+    private boolean                   isTitleBarShow;//是否显示标题栏
+    private ChatRoomListener          listener;//聊天消息界面监听
+    private ChatMessageListAdapter    mAdapter;
+    private Handler    uiHandler=new Handler();
 
+    //相册/拍照帮助类
+    private PickImageHelperClient mPickImageHelper;
 
-     private boolean                 isTitleBarShow;//是否显示标题栏
-     private ChatRoomListener        listener;//聊天消息界面监听
-
+    //权限申请结果码
+    public static final int BASIC_PERMISSION_REQUEST_CODE=1000;
+    //图片选择请求码
+    public static final int PHOTO_REQUEST_CODE = 1001;
+    //拍照选择码
+    public static final int CAMEAR_REQUEST_CODE = 8193;
 
 
 
@@ -127,6 +153,8 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
         initFootView();
         //初始化录音视图
         initRecordView();
+        //初始化更多
+        initMoreData();
         KeyboardDeal();
         setChatShowTitleBar(true);//显示标题栏
         setChatShowBack(true);//显示返回按钮
@@ -184,6 +212,7 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
         flSend=get(R.id.sendLayout);
         ivAddMore=get(R.id.buttonMoreFuntionInText);
         tvSend=get(R.id.buttonSendMessage);
+        tvSend.setOnClickListener(this);
         mEmoticonPickerView=get(R.id.emoticon_picker_view);
         mEmoticonPickerView.setVisibility(View.VISIBLE);
         mEmoticonPickerView.show(BaseChatDelegate.this);
@@ -201,6 +230,26 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
 //        mChronometer=get(R.id.timer);
     }
 
+    /*
+     * 初始化更多视图
+     */
+    private void initMoreData() {
+        //相册
+        actions.add(new BaseAction(R.drawable.message_plus_photo_selector, R.string.input_panel_Album));
+        //拍照
+        actions.add(new BaseAction(R.drawable.message_plus_photo_selector, R.string.input_panel_Camera));
+        //语音通话
+        actions.add(new BaseAction(R.drawable.message_plus_audio_chat_selector,R.string.input_panel_audio_call));
+        //视频通话
+        actions.add(new BaseAction(R.drawable.message_plus_video_chat_selector,R.string.input_panel_video_call));
+        //视频
+        actions.add(new BaseAction(R.drawable.message_plus_video_selector,R.string.input_panel_video));
+        //位置分享
+        actions.add(new BaseAction(R.drawable.message_plus_location_selector,R.string.input_panel_location));
+        ActionsPanel.init(mMoreMenuBg,actions,this);
+
+    }
+
     /**
      * 键盘冲突处理
      */
@@ -213,6 +262,18 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
                     @Override
                     public void onKeyboardShowing(boolean isShowing) {
                         Log.d(TAG, String.format("Keyboard is %s", isShowing ? "showing" : "hiding"));
+                        if(etText.getVisibility()==View.VISIBLE){
+                            ivVoice.setVisibility(View.VISIBLE);
+                            ivVoiceToText.setVisibility(View.INVISIBLE);
+                            flVoice.setVisibility(View.INVISIBLE);
+                            btnSendVoice.setVisibility(View.INVISIBLE);
+                            etText.setVisibility(View.VISIBLE);
+                        }
+                        //若打开了键盘需要将其华东到底部
+                       if(isShowing){
+                           doScrollToBottom();
+                       }
+
                     }
                 });
         // If there are several sub-panels in this activity ( e.p. function-panel, emoji-panel).
@@ -220,18 +281,28 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
                 new KPSwitchConflictUtil.SwitchClickListener() {
                     @Override
                     public void onClickSwitch(boolean switchToPanel) {
-                        if (switchToPanel) {
-                            etText.clearFocus();
-                        } else {
-                            etText.requestFocus();
-                        }
                         if(etText.getVisibility()==View.GONE){
                             ivVoice.setVisibility(View.VISIBLE);
                             ivVoiceToText.setVisibility(View.INVISIBLE);
                             flVoice.setVisibility(View.INVISIBLE);
                             btnSendVoice.setVisibility(View.INVISIBLE);
                             etText.setVisibility(View.VISIBLE);
+
                         }
+                        if (switchToPanel) {
+                            etText.clearFocus();
+                            tvSend.setVisibility(View.INVISIBLE);
+                            ivAddMore.setVisibility(View.VISIBLE);
+                        } else {
+                            etText.requestFocus();
+                            tvSend.setVisibility(View.VISIBLE);
+                            ivAddMore.setVisibility(View.INVISIBLE);
+                        }
+                        //若打开了面板需要将其华东到底部
+                        if(switchToPanel){
+                            doScrollToBottom();
+                        }
+
                     }
                 },
            new KPSwitchConflictUtil.SubPanelAndTrigger(mEmojiMenuBg, ivEmoji),new KPSwitchConflictUtil.SubPanelAndTrigger(mEmojiMenuBg, ivEmoji),
@@ -312,9 +383,33 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
         });
     }
 
+    /**
+     * 初始化打开相册/拍照功能帮助类
+      */
+    private   void  initPicImageHelperInstance(){
+        mPickImageHelper= PickImageHelperClient.newInstance();
+    }
 
+    /**
+     * 获取打开相册/拍照功能帮助类实例
+     * @return
+     */
+    public PickImageHelperClient getPickImageHelper(){
+        if(mPickImageHelper==null){
+             initPicImageHelperInstance();
+        }
+        return   mPickImageHelper;
+    }
 
-
+    /**
+     * 通过打开相册/拍照功能帮助类实例拍照
+     */
+    public void takePhoto() {
+        if(mPickImageHelper==null){
+            initPicImageHelperInstance();
+        }
+        mPickImageHelper.openCamera(getActivity(),getSavedInstanceState(),uiHandler);
+    }
     /****************************方法设置************************************************************************
 
     /**
@@ -467,10 +562,47 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
      * 获取recyclerview
      * @return
      */
+    public  ChatMessageListAdapter   getAdapter(){
+        return mAdapter;
+    }
+
+    /**
+     * 获取recyclerview
+     * @return
+     */
     public  RecyclerView   getRecyclerView(){
         return mRecyclerView;
     }
+    public  void  initAdapter(List<T> list, ChatMessageListAdapter.ChatMessageClickLListener listener){
+        if(mAdapter==null){
+            mAdapter=new ChatMessageListAdapter(list,this.getActivity());
+            if(listener!=null) {
+                mAdapter.setListener(listener);
+            }
+            mRecyclerView.setAdapter(mAdapter);
+        }else{
+            mAdapter.notifyDataSetChanged();
+        }
+    }
 
+    /**
+     * 滑动到底部
+     */
+    public void doScrollToBottom() {
+        if(mAdapter!=null){
+            mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+        }
+    }
+
+    /**
+     * 滑动到底部
+     */
+    public void doScrollToBottom(final int start, final int count) {
+        if(mAdapter!=null){
+            mAdapter.notifyItemRangeChanged(start,count);
+            mRecyclerView.scrollToPosition(mAdapter.getItemCount()-1);
+        }
+    }
     /**
      * 设置recyclerview  LayoutManager
      * @param manager
@@ -503,10 +635,10 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
         }else if(i==R.id.buttonSendMessage){//发送
             String result=etText.getText().toString();
             if(!TextUtils.isEmpty(result)) {
-                MsgModel model = new MsgModel();
-                model.setTime(Utils.getNowDate());//获取当前毫秒值
-                model.setMsgData(result);//数据
-                model.setMsgType(MsgType.TEXT);
+                if(listener!=null){
+                    listener.sendMsg(MessageObject.rightTyoe,MsgType.TEXT,result,Utils.getNowDate());
+                }
+                etText.setText("");
             }
 
         }
@@ -552,4 +684,9 @@ public abstract  class BaseChatDelegate extends AppDeleagte    implements SwipeR
         LogUtils.i("InputPanel", "onStickerSelected, category =" + category + ", sticker =" + item);
     }
 
+    public void onActivityResult(int requestCode, int resultCode, final Intent data) {
+        if(resultCode==RESULT_OK){
+            mPickImageHelper.onActivityResult(requestCode,resultCode,data,this.getActivity(),uiHandler);
+        }
+    }
 }

@@ -9,8 +9,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import com.netease.nim.uikit.R;
-import com.netease.nim.uikit.session.actions.BaseAction;
+import com.hn.chat.R;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,14 @@ public class ActionsPagerAdapter extends PagerAdapter {
     private final List<BaseAction> actions;
     private final ViewPager viewPager;
     private final int gridViewCount;
+    private MoreMenuOnClickListener listener;
 
-    public ActionsPagerAdapter(ViewPager viewPager, List<BaseAction> actions) {
+    public ActionsPagerAdapter(ViewPager viewPager, List<BaseAction> actions, MoreMenuOnClickListener listener) {
         this.context = viewPager.getContext();
         this.actions = new ArrayList<>(actions);
         this.viewPager = viewPager;
         this.gridViewCount = (actions.size() + ITEM_COUNT_PER_GRID_VIEW - 1) / ITEM_COUNT_PER_GRID_VIEW;
+        this.listener=listener;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class ActionsPagerAdapter extends PagerAdapter {
                 public void run() {
                     ViewGroup.LayoutParams layoutParams = viewPager.getLayoutParams();
                     layoutParams.height = context.getResources().getDimensionPixelOffset(
-                            R.dimen.message_bottom_function_viewpager_height);
+                            R.dimen.dp_250);
                     viewPager.setLayoutParams(layoutParams);
                 }
             });
@@ -64,7 +65,7 @@ public class ActionsPagerAdapter extends PagerAdapter {
                 public void run() {
                     ViewGroup.LayoutParams layoutParams = viewPager.getLayoutParams();
                     layoutParams.height = context.getResources().getDimensionPixelOffset(
-                            R.dimen.message_bottom_function_viewpager_height) / 2;
+                            R.dimen.dp_250) / 2;
                     viewPager.setLayoutParams(layoutParams);
                 }
             });
@@ -79,7 +80,9 @@ public class ActionsPagerAdapter extends PagerAdapter {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 int index = ((Integer) parent.getTag()) * ITEM_COUNT_PER_GRID_VIEW + position;
-                actions.get(index).onClick();
+                if(listener!=null){
+                    listener.onMenuClick(index,actions.get(position));
+                }
             }
         });
 

@@ -9,7 +9,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.hn.chat.R;
-import com.hn.chat.widget.FrescoImageView;
+import com.hn.chat.widget.imageview.FrescoImageView;
 
 /**
  * Copyright (C) 2017,深圳市红鸟网络科技股份有限公司 All rights reserved.

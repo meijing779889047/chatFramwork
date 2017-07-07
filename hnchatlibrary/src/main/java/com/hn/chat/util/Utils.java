@@ -10,6 +10,8 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.hn.chat.config.BaseConfig;
+
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -84,4 +86,12 @@ public class Utils {
         Date  date=new Date();
         return  date.getTime();
     }
+
+    /**
+     * 得到应用程序的包名
+     */
+    public static String getPackageName() {
+        return BaseConfig.getContext().getPackageName();
+    }
+
 }

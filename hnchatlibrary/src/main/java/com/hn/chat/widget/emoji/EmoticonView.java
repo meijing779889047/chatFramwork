@@ -139,7 +139,7 @@ public class EmoticonView {
                     imgCur = (ImageView) pageNumberLayout.getChildAt(i);
                 } else {
                     imgCur = new ImageView(context);
-                    imgCur.setBackgroundResource(R.drawable.nim_view_pager_indicator_selector);
+                    imgCur.setBackgroundResource(R.drawable.view_pager_indicator_selector);
                     pageNumberLayout.addView(imgCur);
                 }
             }
@@ -358,7 +358,7 @@ public class EmoticonView {
                 gridView.setHorizontalSpacing(5);
                 gridView.setVerticalSpacing(5);
                 gridView.setGravity(Gravity.CENTER);
-                gridView.setSelector(R.drawable.nim_emoji_item_selector);
+                gridView.setSelector(R.drawable.emoji_item_selector);
                 container.addView(gridView);
                 return gridView;
             } else {
@@ -370,7 +370,7 @@ public class EmoticonView {
                 gridView.setNumColumns(4);
                 gridView.setHorizontalSpacing(5);
                 gridView.setGravity(Gravity.CENTER);
-                gridView.setSelector(R.drawable.nim_emoji_item_selector);
+                gridView.setSelector(R.drawable.emoji_item_selector);
                 container.addView(gridView);
                 return gridView;
             }

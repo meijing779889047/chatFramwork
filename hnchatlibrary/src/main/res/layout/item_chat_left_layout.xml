@@ -11,8 +11,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="@dimen/bubble_time_layout_margin_bottom"
-            android:layout_marginTop="@dimen/bubble_time_layout_margin_top"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:layout_marginTop="@dimen/dp_18"
             android:background="@drawable/nim_bg_message_tip"
             android:paddingLeft="7dip"
             android:layout_gravity="center_horizontal"
@@ -28,10 +28,10 @@
         android:layout_gravity="left"
         android:layout_marginTop="@dimen/dp_10"
         android:orientation="horizontal">
-        <com.hn.library.view.FrescoImageView
+        <com.hn.chat.widget.imageview.FrescoImageView
             android:id="@+id/talk_post_left_user_header_imgs"
-            android:layout_width="@dimen/avatar_size_in_session"
-            android:layout_height="@dimen/avatar_size_in_session"
+            android:layout_width="@dimen/dp_40"
+            android:layout_height="@dimen/dp_40"
             android:layout_marginLeft="6dp"
             android:layout_alignParentLeft="true"
             fresco:actualImageScaleType="centerCrop"
@@ -45,20 +45,20 @@
             android:layout_toRightOf="@+id/talk_post_left_user_header_imgs"
             android:layout_height="wrap_content">
 
-        <com.hn.library.view.FrescoImageView
+        <com.hn.chat.widget.imageview.FrescoImageView
             android:id="@+id/talk_post_left_message_item_thumb_thumbnail"
             android:layout_width="120dp"
             android:layout_height="120dp"
             android:layout_marginRight="@dimen/dp_10"
             android:layout_gravity="center_vertical"
             fresco:actualImageScaleType="centerCrop"
-            fresco:placeholderImage="@drawable/nim_image_default"
+            fresco:placeholderImage="@drawable/image_default"
             fresco:placeholderImageScaleType="centerCrop"
             android:gravity="center"
             android:padding="0dip"
             fresco:roundedCornerRadius="5dp"
             fresco:roundingBorderWidth="2dp"
-            fresco:roundingBorderColor="@color/colorMain"
+            fresco:roundingBorderColor="@color/blue_1E86D5"
             android:layout_marginLeft="8dp"
             android:visibility="gone"
             android:scaleType="centerCrop"
@@ -78,8 +78,8 @@
                 android:includeFontPadding="false"
                 android:background="@drawable/chat_left_bg"
                 android:lineSpacingExtra="3dip"
-                android:maxWidth="@dimen/max_text_bubble_width"
-                android:textColor="@color/black"
+                android:maxWidth="@dimen/dp_222"
+                android:textColor="@color/black_000000"
                 android:textSize="16sp"
                 />
             <FrameLayout
@@ -98,7 +98,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|left"
-                    android:background="@drawable/nim_audio_animation_list_left"
+                    android:background="@drawable/audio_animation_list_left"
                     android:contentDescription="@string/empty"/>
 
                 <TextView
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="wrap_content"
                     android:paddingLeft="2dip"
-                    android:textColor="@color/black"
+                    android:textColor="@color/black_000000"
                     android:textSize="12sp"/>
 
 

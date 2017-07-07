@@ -20,14 +20,16 @@ import android.widget.Toast;
  * 修改备注：
  * Version:  1.0.0
  */
-public abstract class AppDeleagte implements IDelegate {
+public  abstract   class AppDeleagte implements IDelegate {
 
-    protected  View rootView;
-    private    SparseArray<View>   mViews=new SparseArray<>();
+    protected   View rootView;
+    private     SparseArray<View>   mViews=new SparseArray<>();
+    private     Bundle savaInstance;
     @Override
     public void create(LayoutInflater inflater, ViewGroup viewGroup, Bundle savaInstance) {
          int layoutId=getRootLayoutId();
          rootView=inflater.inflate(layoutId,viewGroup,false);
+         this.savaInstance=savaInstance;
     }
 
     @Override
@@ -36,10 +38,16 @@ public abstract class AppDeleagte implements IDelegate {
     }
 
     @Override
+    public Bundle getSavedInstanceState() {
+        return savaInstance;
+    }
+
+    @Override
     public void initWidget() {
 
 
     }
+
 
     @Override
     public Toolbar getToolBar() {
@@ -91,6 +99,7 @@ public abstract class AppDeleagte implements IDelegate {
     public  <T  extends Activity>  T getActivity(){
         return (T) rootView.getContext();
     }
+
 
 
 

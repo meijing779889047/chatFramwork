@@ -11,15 +11,24 @@ package com.hn.chat.impl;
  * 修改备注：
  * Version:  1.0.0
  */
+
 public interface ChatRoomListener   {
+
 
     void   onBack();//返回按钮监听
 
     void   onRefreshListeer();//下拉刷新监听
 
-
-    void   sendMsg();//发送数据
+    /**
+     * 发送消息
+     * @param mMessageObject   发送方
+     * @param msgType          消息类型
+     * @param obj              数据
+     * @param time             时间
+     */
+    void   sendMsg(MessageObject mMessageObject,MsgType msgType,Object obj,long time);//发送数据
 
     void   recevierMsg();//接收数据
+
 
 }

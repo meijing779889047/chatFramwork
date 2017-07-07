@@ -27,7 +27,6 @@ import android.support.annotation.NonNull;
 import android.text.TextUtils;
 import android.widget.ImageView;
 
-import com.bilibili.boxing.demo.R;
 import com.bilibili.boxing.loader.IBoxingCallback;
 import com.bilibili.boxing.loader.IBoxingMediaLoader;
 import com.bilibili.boxing.utils.BoxingFileHelper;
@@ -48,6 +47,7 @@ import com.facebook.imagepipeline.image.CloseableImage;
 import com.facebook.imagepipeline.image.CloseableStaticBitmap;
 import com.facebook.imagepipeline.request.ImageRequest;
 import com.facebook.imagepipeline.request.ImageRequestBuilder;
+import com.hn.chat.R;
 
 import java.io.File;
 

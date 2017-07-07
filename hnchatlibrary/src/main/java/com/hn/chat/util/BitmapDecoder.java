@@ -1,14 +1,19 @@
 package com.hn.chat.util;
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Build;
+import android.os.Environment;
+import android.text.TextUtils;
 
+import java.io.BufferedOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -112,5 +117,64 @@ public class BitmapDecoder {
         return null;
     }
 
+    public static String compressBitmap(String oldPath, Context context) {
+        BitmapFactory.Options option = new BitmapFactory.Options();
+        option.inJustDecodeBounds = true;
+        int sampleSize = 0;
+        int widthMax = 1080;
+        int heightMax =720;
+        if (option.outWidth > option.outHeight) {
+            if (option.outWidth <= widthMax) {
+                return oldPath;
+            }
+            sampleSize = (int) ((option.outWidth * 1f / widthMax) + 0.5f);
+        } else {
+            if (option.outHeight <= heightMax) {
+                return oldPath;
+            }
+            sampleSize = option.outHeight / heightMax;
+        }
+
+        option.inSampleSize = sampleSize;
+        option.inPreferredConfig = Bitmap.Config.RGB_565;
+        option.inJustDecodeBounds = false;
+        Bitmap compressedBitmap = BitmapFactory.decodeFile(oldPath, option);
+        return storeBitmap(context, compressedBitmap,oldPath);
+    }
+
+    public static String storeBitmap(Context context, Bitmap photo, String oldPath) {
+        try {
+
+            String path;
+            if(TextUtils.isEmpty(oldPath)) {
+                if (Environment.isExternalStorageEmulated()) {
+                    path = context.getExternalCacheDir().getPath();
+                } else {
+                    path = context.getCacheDir().getPath();
+                }
+            }else{
+
+                int index=oldPath.lastIndexOf("/");
+                 path=oldPath.substring(0,index);
+            }
+            File dirFile = new File(path);
+            if (!dirFile.exists()) {
+                dirFile.mkdirs();
+            }
+
+            File myCaptureFile = new File(path, System.currentTimeMillis() + ".jpg");
+            BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(myCaptureFile));
+            photo.compress(Bitmap.CompressFormat.JPEG, 60, bos);
+            bos.flush();
+            bos.close();
+            if(new File(oldPath).exists()){
+                FileUtil.deleteFile(oldPath);
+            }
+            return myCaptureFile.getAbsolutePath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
 
 }

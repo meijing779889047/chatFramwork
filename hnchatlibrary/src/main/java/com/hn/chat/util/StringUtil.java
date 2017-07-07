@@ -2,11 +2,17 @@ package com.hn.chat.util;
 
 import android.text.TextUtils;
 
+import com.hn.chat.util.storage.StorageType;
+import com.hn.chat.util.storage.StorageUtil;
+
 import java.util.Locale;
 import java.util.UUID;
 
 public class StringUtil {
-	
+
+
+	public static final String JPG =".jpg";
+
 	public static String getPercentString(float percent) {
 		return String.format(Locale.US, "%d%%", (int) (percent * 100));
 	}
@@ -102,4 +108,14 @@ public class StringUtil {
         }
         return count;
     }
+
+	/**
+	 * 获取临时存储文件路径
+	 * @return
+	 */
+	public static String tempFile() {
+		String filename = StringUtil.get32UUID() + JPG;
+		return StorageUtil.getWritePath(filename, StorageType.TYPE_IMAGE);
+	}
+
 }

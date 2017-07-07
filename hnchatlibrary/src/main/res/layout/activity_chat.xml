@@ -3,7 +3,7 @@
     android:id="@+id/activity_chat"
     android:layout_width="match_parent"
     android:orientation="vertical"
-    android:background="@color/white"
+    android:background="@color/white_f0f0f5"
     android:layout_height="match_parent">
     <include  layout="@layout/chat_room_title_layout"></include>
     <include  layout="@layout/chat_room_message_list_layout"></include>
