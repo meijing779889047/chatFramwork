@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fresco="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:paddingBottom="@dimen/dp_10"
+    android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/talk_post_left_tv_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/bubble_time_layout_margin_bottom"
+            android:layout_marginTop="@dimen/bubble_time_layout_margin_top"
+            android:background="@drawable/nim_bg_message_tip"
+            android:paddingLeft="7dip"
+            android:layout_gravity="center_horizontal"
+            android:paddingRight="7dip"
+            android:textColor="#ffffff"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:visibility="visible" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tv_time"
+        android:layout_gravity="left"
+        android:layout_marginTop="@dimen/dp_10"
+        android:orientation="horizontal">
+        <com.hn.library.view.FrescoImageView
+            android:id="@+id/talk_post_left_user_header_imgs"
+            android:layout_width="@dimen/avatar_size_in_session"
+            android:layout_height="@dimen/avatar_size_in_session"
+            android:layout_marginLeft="6dp"
+            android:layout_alignParentLeft="true"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:placeholderImage="@drawable/circle_image_default_bg"
+            fresco:placeholderImageScaleType="centerCrop"
+            fresco:roundAsCircle="true" />
+
+        <RelativeLayout
+            android:id="@+id/talk_post_left_content"
+            android:layout_width="wrap_content"
+            android:layout_toRightOf="@+id/talk_post_left_user_header_imgs"
+            android:layout_height="wrap_content">
+
+        <com.hn.library.view.FrescoImageView
+            android:id="@+id/talk_post_left_message_item_thumb_thumbnail"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_marginRight="@dimen/dp_10"
+            android:layout_gravity="center_vertical"
+            fresco:actualImageScaleType="centerCrop"
+            fresco:placeholderImage="@drawable/nim_image_default"
+            fresco:placeholderImageScaleType="centerCrop"
+            android:gravity="center"
+            android:padding="0dip"
+            fresco:roundedCornerRadius="5dp"
+            fresco:roundingBorderWidth="2dp"
+            fresco:roundingBorderColor="@color/colorMain"
+            android:layout_marginLeft="8dp"
+            android:visibility="gone"
+            android:scaleType="centerCrop"
+            fresco:roundAsCircle="false"
+            />
+
+            <TextView
+                android:id="@+id/talk_post_left_tv_content"
+                android:layout_width="wrap_content"
+                android:layout_marginRight="@dimen/dp_10"
+                tools:text="qwefrqewcnqwdreuiofiweroghioaerujhgoiewrugnrsejiognojrsengerjksgnserjgnrseuignresjgnrseg"
+                android:layout_marginLeft="8dp"
+                android:layout_height="wrap_content"
+                android:visibility="visible"
+                android:autoLink="phone|email|web"
+                android:gravity="center_vertical|left"
+                android:includeFontPadding="false"
+                android:background="@drawable/chat_left_bg"
+                android:lineSpacingExtra="3dip"
+                android:maxWidth="@dimen/max_text_bubble_width"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                />
+            <FrameLayout
+                android:id="@+id/talk_post_left_message_item_audio_container"
+                android:background="@drawable/chat_left_bg"
+                android:layout_gravity="center_vertical"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/dp_10"
+                android:layout_marginLeft="@dimen/dp_10"
+                android:visibility="gone"
+                android:layout_width="wrap_content"
+                >
+
+                <ImageView
+                    android:id="@+id/talk_post_left_message_item_audio_playing_animation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|left"
+                    android:background="@drawable/nim_audio_animation_list_left"
+                    android:contentDescription="@string/empty"/>
+
+                <TextView
+                    android:id="@+id/talk_post_left_message_item_audio_duration"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_height="wrap_content"
+                    android:layout_width="wrap_content"
+                    android:paddingLeft="2dip"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"/>
+
+
+            </FrameLayout>
+        </RelativeLayout>
+
+        <ProgressBar
+            android:id="@+id/talk_post_left_message_item_progressBar"
+            android:layout_width="@dimen/dp_10"
+            android:visibility="gone"
+            android:layout_centerVertical="true"
+            style="@style/Widget.AppCompat.ProgressBar"
+            android:layout_marginLeft="@dimen/dp_3"
+            android:layout_toRightOf="@+id/talk_post_left_content"
+            android:layout_height="@dimen/dp_10" />
+    </RelativeLayout>
+</LinearLayout>
